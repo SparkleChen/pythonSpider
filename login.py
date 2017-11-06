@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-import  simplejson
-import  time
+import simplejson
+import time
+from PIL import Image
 
 # 构造 Request headers
 agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0'
@@ -25,7 +26,7 @@ print("获取到的xsrf_token为： ", xsrf_token)
 def get_captcha():
     # 验证码URL是按照时间戳的方式命名的
     captcha_url = 'https://www.zhihu.com/captcha.gif?r=%d&type=login&lang=cn' % (int(time.time() * 1000))
-    response = session.get(captcha_url, headers=header)
+    response = session.get(captcha_url, headers=headers)
     # 保存验证码到当前目录
     with open('captcha.gif', 'wb') as f:
         f.write(response.content)
