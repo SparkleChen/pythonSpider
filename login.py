@@ -67,8 +67,9 @@ postdata = {
  }
 loginresponse = session.post(url=loginurl, headers=headers, data=postdata)
 print('服务器端返回响应码：', loginresponse.status_code)
-print(loginresponse.json())
-print(session.cookies.get_dict())
+
+r = session.get(url="https://www.zhihu.com/people/edit", headers=headers)
+print(r.text)
 #请求后自动更新cookie
 #r = session.get(url)
 #if r.cookies.get_dict():
