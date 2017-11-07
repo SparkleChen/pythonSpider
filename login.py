@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import simplejson
 import time
 from PIL import Image
+from http import cookiejar
+import os
 
 # 构造 Request headers
 agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0'
@@ -52,8 +54,6 @@ def get_captcha():
         captcha['input_points'].append(points[int(i) - 1])
     return simplejson.dumps(captcha)
 
-
-
 ########### 开始登陆
 headers['X-Xsrftoken'] = xsrf_token
 headers['X-Requested-With'] = 'XMLHttpRequest'
@@ -64,7 +64,12 @@ postdata = {
     'password': 'lyh19951020',
     'captcha_type': 'cn',
     'captcha': get_captcha()
-}
+ }
 loginresponse = session.post(url=loginurl, headers=headers, data=postdata)
 print('服务器端返回响应码：', loginresponse.status_code)
 print(loginresponse.json())
+print(session.cookies.get_dict())
+#请求后自动更新cookie
+#r = session.get(url)
+#if r.cookies.get_dict():
+# session.cookies.update(r.cookies)
