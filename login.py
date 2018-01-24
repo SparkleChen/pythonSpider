@@ -53,8 +53,8 @@ class Loginzh:
         loginurl = 'https://www.zhihu.com/login/phone_num'
         postdata = {
             '_xsrf': self.xsrf_token,
-            'phone_num': '18482175910',
-            'password': 'lyh19951020',
+            'phone_num': '......',
+            'password': '.......',
             'captcha_type': 'cn',
             'captcha': self.get_captcha()
         }
